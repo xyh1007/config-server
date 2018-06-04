@@ -1,0 +1,26 @@
+server: 
+  port: 8888
+spring: 
+  application: 
+    name: config-server
+  cloud: 
+    config: 
+      server: 
+        git: 
+          uri: http://192.168.31.80/root/cloud-config-repo.git
+          searchPaths: cloud
+          username: 
+          password: 
+      label: master
+    bus: 
+      enable: true
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:123456@${EUREKA_SEVER_HOST}/eureka/
+      #defaultZone: http://localhost:8761/eureka/
+  instance: 
+    preferIpAddress: true
+    instance-id: ${CF_INSTANCE_IP}:${CF_INSTANCE_PORT}
+    ip-address: ${CF_INSTANCE_IP}
+    nonSecurePort: ${CF_INSTANCE_PORT}
